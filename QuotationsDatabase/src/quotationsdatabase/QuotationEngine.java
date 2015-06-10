@@ -143,11 +143,15 @@ public class QuotationEngine {
     }
 
     public String toString() {
-        String output = "";
+        String output = "In Author Name:\n";
         for (int i = 0; i < search.size(); i++) {
+            if (search.get(i)!=-1){
             output += quotes.get(search.get(i)).getQuote() + "\n" + quotes.get(search.get(i)).getAuthor();
             if (i != (search.size() - 1)) {
                 output += "\n";
+            }
+            } else {
+                output+="\nIn Quote:\n";
             }
         }
         return output;
