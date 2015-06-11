@@ -115,36 +115,16 @@ public class QuotationEngine {
         if (currQuoteNum == -1) {
         }
     }
-    public void sortQuotes() {
-        selectionSort(quotes);
-        //Write the quotes to the file
-        try {
-            saveQuotesToFile();
-        } catch (IOException e) {
-            System.err.println("Error saving to file");
-        }
-    }
+   
 
-    public static void selectionSort(ArrayList<Quote> q) {
-        int smallest;
-        for (int i = 0; i < q.size() - 1; i++) {
-            smallest = i;
-            //see if there is a smaller number further in the array
-            for (int index = i + 1; index < q.size(); index++) {
-                if (q.get(index).getAuthor().compareTo(q.get(smallest).getAuthor()) < 0) {
-                    swap(q, smallest, index);
-                }
-            }
-        }
+    public void alphebeticalSortAuthor() {
+ Collections.sort(quotes, Comparator.comparing(Quote::getAuthor));  
+ write();
     }
-
-    public void alphebeticalSort() {
-        Collections.sort(quotes);
-        try {
-            saveQuotesToFile();
-        } catch (IOException e) {
-            System.err.println("Error saving to file");
-        }
+    
+    public void alphebeticalSortQuote() {
+         Collections.sort(quotes, Comparator.comparing(Quote::getQuote));  
+ write();
     }
 
     public static void swap(ArrayList<Quote> q, int first, int second) {

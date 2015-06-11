@@ -1,6 +1,6 @@
 package quotationsdatabase;
 
-public class Quote implements Comparable<Quote>{
+public class Quote {
     private String msg, author;
 
     public Quote(String _Quote, String _Author){
@@ -24,7 +24,7 @@ public class Quote implements Comparable<Quote>{
         author = _Author;
     }
     
-    public int compareTo(Quote other) {
-        return author.compareTo(other.author);
-    }
+//    public int compareTo(Quote other) {
+//        return author.compareTo(other.author);
+//    }
 }
