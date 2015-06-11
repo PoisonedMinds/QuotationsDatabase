@@ -2,6 +2,8 @@ package quotationsdatabase;
 
 import java.util.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class QuotationEngine {
 
@@ -71,10 +73,19 @@ public class QuotationEngine {
     }
 
     public void saveQuotesToFile() throws IOException {
-        System.out.println(toString());
         PrintWriter fileOut = new PrintWriter(new FileWriter("src\\quoteviewer\\quotes.txt"));
         fileOut.println(toString());
         fileOut.close();
+    }
+    public void write() {
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter("quotes.txt"));
+                writer.println(toString());
+            writer.close();
+        } catch (IOException ex) {
+            System.out.println("An error has occured.");
+            System.exit(0);
+        }
     }
     public void searchQuotes(String searchTerm) {
                 findAuthor(searchTerm);
@@ -142,7 +153,7 @@ public class QuotationEngine {
         q.set(second, hold);
     }
 
-    public String toString() {
+    public String toStringSearch() {
         String output = "In Author Name:\n";
         for (int i = 0; i < search.size(); i++) {
             if (search.get(i)!=-1){
@@ -156,6 +167,7 @@ public class QuotationEngine {
         }
         return output;
     }
+    
 
     public String toStringWithNumbers() {
         String output = "";
@@ -171,6 +183,16 @@ public class QuotationEngine {
         return output;
     }
 
+    public String toString() {
+        String output = "";
+        for(int i = 0; i < quoteCount; i++){
+            output += quotes.get(i).getQuote() + "\n" + quotes.get(i).getAuthor();
+            if(i != (quoteCount - 1))
+                output += "\n";
+        }
+        return output;
+    }
+    
     public static ArrayList read(String path) {
         int num = 0;
         ArrayList contents = new ArrayList();

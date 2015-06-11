@@ -1,6 +1,9 @@
 package quotationsdatabase;
 
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -19,7 +22,7 @@ public class QuotationsDatabase {
         String buttons[] = {"List Quotes", "Search Quotes", "Sort Quotes", "Add a Quote", "Remove a Quote", "Exit"};
         QuotationEngine qEngine = new QuotationEngine();
         String searchTerm, name, quote;
-        int option = 0,index = 0;
+        int option = 0, index = 0;
         while (option != 5) {
             option = JOptionPane.showOptionDialog(null, "What would you like to do?", "Quotations Database", JOptionPane.PLAIN_MESSAGE, 3, null, buttons, buttons[0]);
             if (option == 0) {
@@ -31,7 +34,7 @@ public class QuotationsDatabase {
                 searchTerm = JOptionPane.showInputDialog("What would you like to search for?\nType part of the quote or the Author's name");
                 if (searchTerm != null) {
                     qEngine.searchQuotes(searchTerm);
-                    textArea.setText(qEngine.toString());
+                    textArea.setText(qEngine.toStringSearch());
                     scrollPane = new JScrollPane(textArea);
                     JOptionPane.showMessageDialog(null, scrollPane);
                 }
@@ -45,17 +48,18 @@ public class QuotationsDatabase {
                         qEngine.addQuote(quote, name);
                     }
                 }
-            } else if (option==4) {
-                String quotearray[]=new String[qEngine.numOfQuotes()];
-                for (int i=0;i<quotearray.length;i++){
-                    quotearray[i]=qEngine.getQuote(i);
+            } else if (option == 4) {
+                String quotearray[] = new String[qEngine.numOfQuotes()];
+                for (int i = 0; i < quotearray.length; i++) {
+                    quotearray[i] = qEngine.getQuote(i);
                 }
-                searchTerm=(String)JOptionPane.showInputDialog(null, "What quote would you like to remove", "QuotationsDatabase", JOptionPane.PLAIN_MESSAGE, null, quotearray, quotearray[0]);
-                index=Arrays.asList(quotearray).lastIndexOf(searchTerm);
+                searchTerm = (String) JOptionPane.showInputDialog(null, "What quote would you like to remove", "QuotationsDatabase", JOptionPane.PLAIN_MESSAGE, null, quotearray, quotearray[0]);
+                index = Arrays.asList(quotearray).lastIndexOf(searchTerm);
                 qEngine.removeQuote(index);
             }
 
         }
+        qEngine.write();
     }
 
 }
