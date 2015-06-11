@@ -1,5 +1,6 @@
 package quotationsdatabase;
 
+import java.util.Arrays;
 import javax.swing.*;
 
 /**
@@ -17,8 +18,8 @@ public class QuotationsDatabase {
     public static void main(String[] args) {
         String buttons[] = {"List Quotes", "Search Quotes", "Sort Quotes", "Add a Quote", "Remove a Quote", "Exit"};
         QuotationEngine qEngine = new QuotationEngine();
-        String searchTerm,name,quote;
-        int option = 0;
+        String searchTerm, name, quote;
+        int option = 0,index = 0;
         while (option != 5) {
             option = JOptionPane.showOptionDialog(null, "What would you like to do?", "Quotations Database", JOptionPane.PLAIN_MESSAGE, 3, null, buttons, buttons[0]);
             if (option == 0) {
@@ -28,16 +29,30 @@ public class QuotationsDatabase {
 
             } else if (option == 1) {
                 searchTerm = JOptionPane.showInputDialog("What would you like to search for?\nType part of the quote or the Author's name");
-                qEngine.searchQuotes(searchTerm);
-                textArea.setText(qEngine.toString());
-                scrollPane = new JScrollPane(textArea);
-                JOptionPane.showMessageDialog(null, scrollPane);
-            } else if (option==2) {
-                
-            } else if (option==3) {
-                quote=JOptionPane.showInputDialog("What is the quote");
-                name=JOptionPane.showInputDialog("What is the author's name?");
-                qEngine.addQuote(quote, name);
+                if (searchTerm != null) {
+                    qEngine.searchQuotes(searchTerm);
+                    textArea.setText(qEngine.toString());
+                    scrollPane = new JScrollPane(textArea);
+                    JOptionPane.showMessageDialog(null, scrollPane);
+                }
+            } else if (option == 2) {
+
+            } else if (option == 3) {
+                quote = JOptionPane.showInputDialog("What is the quote");
+                if (quote != null) {
+                    name = JOptionPane.showInputDialog("What is the author's name?");
+                    if (name != null) {
+                        qEngine.addQuote(quote, name);
+                    }
+                }
+            } else if (option==4) {
+                String quotearray[]=new String[qEngine.numOfQuotes()];
+                for (int i=0;i<quotearray.length;i++){
+                    quotearray[i]=qEngine.getQuote(i);
+                }
+                searchTerm=(String)JOptionPane.showInputDialog(null, "What quote would you like to remove", "QuotationsDatabase", JOptionPane.PLAIN_MESSAGE, null, quotearray, quotearray[0]);
+                index=Arrays.asList(quotearray).lastIndexOf(searchTerm);
+                qEngine.removeQuote(index);
             }
 
         }

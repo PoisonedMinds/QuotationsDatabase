@@ -6,7 +6,7 @@ import java.io.*;
 public class QuotationEngine {
 
     private ArrayList<Quote> quotes;
-    public ArrayList<Integer> search=new ArrayList();
+    private ArrayList<Integer> search=new ArrayList();
     private int quoteCount, currQuoteNum;
 
     public QuotationEngine() {
@@ -38,14 +38,14 @@ public class QuotationEngine {
         quoteCount++;
     }
 
-    public void deleteQuote(int n) {
+    public void removeQuote(int n) {
         quotes.remove(n);
         quoteCount--;
     }
 
-    public Quote getQuote(int i) {
+    public String getQuote(int i) {
         currQuoteNum = i;
-        return quotes.get(i);
+        return quotes.get(i).getQuote();
     }
 
     public int getCurrQuoteNum() {
@@ -192,6 +192,9 @@ public class QuotationEngine {
             System.exit(1);
         }
         return contents;
+    }
+    public int numOfQuotes(){
+        return (quotes.size());
     }
 
 }
