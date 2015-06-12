@@ -24,7 +24,4 @@ public class Quote {
         author = _Author;
     }
     
-//    public int compareTo(Quote other) {
-//        return author.compareTo(other.author);
-//    }
 }

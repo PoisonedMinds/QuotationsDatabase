@@ -2,8 +2,6 @@ package quotationsdatabase;
 
 import java.util.*;
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class QuotationEngine {
 
@@ -31,10 +29,6 @@ public class QuotationEngine {
         }
     }
 
-    public String viewCurrQuote() {
-        return quotes.get(currQuoteNum).getQuote() + "\n" + quotes.get(currQuoteNum).getAuthor();
-    }
-
     public void addQuote(String _Quote, String _Author) {
         quotes.add(new Quote(_Quote, _Author));
         quoteCount++;
@@ -50,33 +44,6 @@ public class QuotationEngine {
         return quotes.get(i).getQuote();
     }
 
-    public int getCurrQuoteNum() {
-        return currQuoteNum;
-    }
-
-    public void nextQuote() {
-        currQuoteNum++;
-        if (currQuoteNum >= quoteCount) {
-            currQuoteNum = 0;
-        }
-    }
-
-    public void prevQuote() {
-        currQuoteNum--;
-        if (currQuoteNum < 0) {
-            currQuoteNum = quoteCount - 1;
-        }
-    }
-
-    public void randQuote() {
-        currQuoteNum = (int) (Math.random() * quoteCount);
-    }
-
-    public void saveQuotesToFile() throws IOException {
-        PrintWriter fileOut = new PrintWriter(new FileWriter("src\\quoteviewer\\quotes.txt"));
-        fileOut.println(toString());
-        fileOut.close();
-    }
     public void write() {
         try {
             PrintWriter writer = new PrintWriter(new FileWriter("quotes.txt"));
@@ -115,8 +82,7 @@ public class QuotationEngine {
         if (currQuoteNum == -1) {
         }
     }
-   
-
+    
     public void alphebeticalSortAuthor() {
  Collections.sort(quotes, Comparator.comparing(Quote::getAuthor));  
  write();
@@ -125,12 +91,6 @@ public class QuotationEngine {
     public void alphebeticalSortQuote() {
          Collections.sort(quotes, Comparator.comparing(Quote::getQuote));  
  write();
-    }
-
-    public static void swap(ArrayList<Quote> q, int first, int second) {
-        Quote hold = q.get(first);
-        q.set(first, q.get(second));
-        q.set(second, hold);
     }
 
     public String toStringSearch() {
@@ -156,19 +116,7 @@ public class QuotationEngine {
             if (i != (quoteCount - 1)) {
                 output += "\n";
             }
-            System.out.println(quotes.get(i).getQuote());
-            System.out.println(quotes.get(i).getAuthor());
 
-        }
-        return output;
-    }
-
-    public String toString() {
-        String output = "";
-        for(int i = 0; i < quoteCount; i++){
-            output += quotes.get(i).getQuote() + "\n" + quotes.get(i).getAuthor();
-            if(i != (quoteCount - 1))
-                output += "\n";
         }
         return output;
     }
