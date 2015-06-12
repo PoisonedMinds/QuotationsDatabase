@@ -84,12 +84,12 @@ public class QuotationEngine {
     }
     
     public void alphebeticalSortAuthor() {
- Collections.sort(quotes, Comparator.comparing(Quote::getAuthor));  
+ Collections.sort(quotes, Comparator.comparing((quote) -> quote.getAuthor().toLowerCase()));  
  write();
     }
     
     public void alphebeticalSortQuote() {
-         Collections.sort(quotes, Comparator.comparing(Quote::getQuote));  
+ Collections.sort(quotes, Comparator.comparing((quote) -> quote.getQuote().toLowerCase()));  
  write();
     }
 
@@ -145,6 +145,15 @@ public class QuotationEngine {
     }
     public int numOfQuotes(){
         return (quotes.size());
+    }
+     public String toString() {
+        String output = "";
+        for(int i = 0; i < quoteCount; i++){
+            output += quotes.get(i).getQuote() + "\n" + quotes.get(i).getAuthor();
+            if(i != (quoteCount - 1))
+                output += "\n";
+        }
+        return output;
     }
 
 }
