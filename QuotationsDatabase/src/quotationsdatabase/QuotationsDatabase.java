@@ -1,9 +1,6 @@
 package quotationsdatabase;
 
-import java.io.IOException;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -11,7 +8,7 @@ import javax.swing.*;
  * @author Steven Biro
  * @teacher Mr. J. Carron
  * @date 8-Jun-2015 2:11:49 PM
- * @purpose The purpose of this program is to
+ * @purpose The purpose of this program is to interact between the user and the functions of the program
  */
 public class QuotationsDatabase {
 
