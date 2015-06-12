@@ -15,6 +15,7 @@ public class QuotationEngine {
     private ArrayList<Integer> search = new ArrayList();
 
     public QuotationEngine() {
+        //fill the quotes list with the quotes from the file
         quotes = new ArrayList<Quote>();
         int num = 0;
         String line1 = null, line2 = null;
